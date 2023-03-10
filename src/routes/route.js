@@ -5,6 +5,7 @@ import isAuthenticated from "../middleware/jwtValidate.js";
 import layananRoute from "./layananRoute.js";
 import {createUser} from "../controllers/userController.js";
 import authRoute from "./authRoute.js";
+import orderRoute from "./orderRoute.js";
 
 const route = express.Router();
 
@@ -12,6 +13,7 @@ route.use(authRoute);
 route.get('/register', createUser);
 route.use(isAuthenticated ,userRoute);
 route.use(isAuthenticated, layananRoute);
+route.use(isAuthenticated, orderRoute);
 
 export default route;
 

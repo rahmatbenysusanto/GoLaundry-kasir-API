@@ -3,10 +3,17 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import route from './src/routes/route.js';
 import apiKeyValidate from "./src/middleware/apiKeyValidate.js";
+import {create} from "./src/controllers/apiKeyController.js";
 
 dotenv.config();
 
 const app = express();
+app.post('/tes',  (req, res) => {
+    res.json({
+        status: 200,
+        message: 'Success'
+    })
+});
 app.use(cors());
 app.use(express.json());
 

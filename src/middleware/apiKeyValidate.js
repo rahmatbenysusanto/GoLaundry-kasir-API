@@ -30,6 +30,8 @@ const apiKeyValidate = async (req, res, next) => {
     }else{
         responseNotData(res, false, 'API KEY is not available', 400);
     }
+
+    return next();
 }
 
 export default apiKeyValidate;
