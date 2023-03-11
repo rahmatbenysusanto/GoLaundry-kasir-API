@@ -83,7 +83,7 @@ export const findById = async (req, res) => {
 
 export const updateStatusOrder = async (req, res) => {
     try {
-        const update = await order.update({
+        await order.update({
             status: req.body.status
         }, {
             where: {
@@ -91,9 +91,9 @@ export const updateStatusOrder = async (req, res) => {
             }
         });
 
-        return responseNotData(res, true, 'Update Status Successfully', 200);
+        return responseNotData(res, true, 'Update Status Order Successfully', 200);
     } catch (err) {
-
+        return responseNotData(res, false, 'Update Status Order Failed', 400);
     }
 }
 
