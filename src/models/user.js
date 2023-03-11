@@ -31,6 +31,9 @@ const user = db.define('user', {
     salt: {
         type: DataTypes.TEXT,
     },
+    expired: {
+        type: DataTypes.DATE,
+    },
     createdAt: {
         type: DataTypes.DATE,
     },
