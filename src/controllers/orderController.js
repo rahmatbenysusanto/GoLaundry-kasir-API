@@ -1,8 +1,8 @@
 import order from '../models/order.js';
 import orderDetail from "../models/orderDetail.js";
 import orderHistory from "../models/orderHistory.js";
-import {responseNotData} from "../services/responseService.js";
-import {create} from "./apiKeyController.js";
+import {responseNotData, responseWithData} from "../services/responseService.js";
+import client from "../models/client.js";
 
 export const createOrder = async (req, res) => {
     try {
@@ -37,4 +37,63 @@ export const createOrder = async (req, res) => {
     }
 }
 
+export const getOrder = async (req, res) => {
+    try {
+        const getOrder = await order.findAll({
+            include: [
+                {
+                    model: orderDetail
+                },
+                {
+                    model: client
+                }
+            ],
+            where: {
+                user_id: req.body.user_id,
+            }
+        });
+
+        return responseWithData(res, true, 'Get Order Successfully', getOrder, 200);
+    } catch (err) {
+        responseNotData(res, false, err.message, 400);
+    }
+}
+
+export const findById = async (req, res) => {
+    try {
+        const find = await order.findOne({
+            include: [
+                {
+                    model: orderDetail
+                },
+                {
+                    model: client
+                }
+            ],
+            where: {
+                id: req.params.id
+            }
+        });
+
+        return responseWithData(res, true, 'Get Order Successfully', find, 200);
+    } catch (err) {
+        return responseNotData(res, false, 'Get Order Failure', 400);
+    }
+}
+
+export const updateStatusOrder = async (req, res) => {
+    try {
+        const update = await order.update({
+            status: req.body.status
+        }, {
+            where: {
+                id: req.params.id
+            }
+        });
+
+        return responseNotData(res, true, 'Update Status Successfully', 200);
+    } catch (err) {
+
+    }
+}
 

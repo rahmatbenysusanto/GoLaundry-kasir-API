@@ -1,5 +1,7 @@
 import { Sequelize, DataTypes } from 'sequelize';
 import db from "../config/databaseConfig.js";
+import orderDetail from "./orderDetail.js";
+import client from "./client.js";
 
 const order = db.define('order', {
     id: {
@@ -9,9 +11,11 @@ const order = db.define('order', {
     },
     client_id: {
         type: DataTypes.INTEGER,
+        foreignKey: true,
     },
     user_id: {
         type: DataTypes.INTEGER,
+        foreignKey: true,
     },
     price: {
         type: DataTypes.DECIMAL(15, 0)
@@ -28,5 +32,9 @@ const order = db.define('order', {
 }, {
     freezeTableName: true
 });
+
+order.hasMany(orderDetail, { foreignKey: 'order_id' });
+order.hasOne(client, { foreignKey: 'client_id' });
+order.belongsTo(client, { foreignKey: 'client_id'});
 
 export default order;

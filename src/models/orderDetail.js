@@ -1,5 +1,6 @@
 import { Sequelize, DataTypes } from 'sequelize';
 import db from "../config/databaseConfig.js";
+import order from "./order.js";
 
 const orderDetail = db.define('order_detail', {
     id: {
@@ -9,6 +10,7 @@ const orderDetail = db.define('order_detail', {
     },
     user_id: {
         type: DataTypes.INTEGER,
+        foreignKey: true,
     },
     client_id: {
         type: DataTypes.INTEGER,
