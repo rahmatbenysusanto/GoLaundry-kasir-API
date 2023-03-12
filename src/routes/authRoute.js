@@ -4,6 +4,6 @@ import { create } from "../controllers/apiKeyController.js";
 
 const authRoute = express.Router();
 
-authRoute.get('/login', login);
+authRoute.post('/login', login);
 authRoute.post('/create-api-key', create);
 export default authRoute;
